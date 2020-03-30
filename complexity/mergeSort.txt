@@ -1,0 +1,17 @@
+In merge sort,
+function keeps on calling the same function recursiely until size of array
+reduces to 1.
+after all the recursions are completed , an array of size n is created to merge left and right
+arrays.
+thus ,space complexity is O(n);
+                                n
+                               / \
+                            n/2    n/2   // at one point, only one side is being called
+                            / \     / \
+                        n/4   n/4  n/4 n/4
+the left half calling (say) is finished first , then right half is called.
+So at most log(n) functions will wait at a time.
+Also at each step a duplicate array will be created temporarily for merging both half.
+Finally , Array of size n will be created for merging the left and right half.
+
+So space complexity is n+log(n) ~ O(n).

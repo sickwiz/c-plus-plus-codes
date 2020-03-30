@@ -1,0 +1,6 @@
+//***************************TEMPLATES***************************//
+#->
+SUPPOSE WE DESIGN A CLASS OR WRITE A FUNCTION FOR SAY INTEGER DATA TYPE BUT WE WANT TO USE THE 
+SAME FUNCTION FOR SOME OTHER DATA TYPE,
+THEN WE USE TEMPLATES.
+//**************************************************************//
