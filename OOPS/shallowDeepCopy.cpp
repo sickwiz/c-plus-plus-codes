@@ -12,8 +12,8 @@ class student
         // SHALLOW COPY
         // Here the name of the object is pointing to the address of the passsed
         //argument. i.e name will change if passed name is changed in  main function.
-        this->name=name;
-        //DEEP COPY--->A NEW ARRAY IS CHARACTED AND ENTIRE ARRAY IS COPIED
+         this->name=name;
+        //DEEP COPY--->A NEW ARRAY IS CREATED AND ENTIRE ARRAY IS COPIED
         name1=new char[strlen(name)+1];      // +1 for null character 
         strcpy(name1,name);
     }
