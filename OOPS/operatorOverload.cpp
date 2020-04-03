@@ -75,7 +75,7 @@ class fraction
         fnew.simplify();
         numerator+=denominator;
         simplify();
-        return *this;
+        return fnew;;
     }
 };
 int main()
@@ -91,4 +91,5 @@ int main()
     f1.print();
     ++(++f1);
     f1.print();
+   (f1++).print();
 }
