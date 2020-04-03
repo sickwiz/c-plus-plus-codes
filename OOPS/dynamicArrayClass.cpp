@@ -16,7 +16,7 @@ class dArray
     {
         // COPY CONSTRUCTOR FOR DEEP COPY
         this->data=new int[d.capacity];
-        for(int i=0;i<d.caoacity;i++)
+        for(int i=0;i<d.capacity;i++)
         {
             this->data[i]=d.data[i];
         }
@@ -27,14 +27,13 @@ class dArray
     void operator=(dArray const &d)
     {
        this->data=new int[d.capacity];
-        for(int i=0;i<d.caoacity;i++)
+        for(int i=0;i<d.capacity;i++)
         {
             this->data[i]=d.data[i];
         }
         this->nextIndex=d.nextIndex;
         this->capacity=d.capacity;
     }  
-    }
     void insert(int a)
     {
         if(nextIndex==capacity)
@@ -64,10 +63,10 @@ class dArray
         if(i>=capacity || i<0)
             {
                 cout<<endl<<"index out of limit"<<endl;
-                return 
+                return 0;
             }
         else
-            return a1[i];
+            return data[i];
 
     }
 };
