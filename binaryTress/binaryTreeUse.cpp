@@ -19,20 +19,6 @@ binaryTreeNode<int> *takeInput()
     root->right=rightChild;
     return root;
 }
-//********************print root -left - right**********************//
-void print(binaryTreeNode<int>*root)
-{
-    if(root==NULL)
-        return;
-    cout<<root->data<<":";
-    if(root->left != NULL)
-        cout<<"L->"<<root->left->data ;
-    if(root->right!=NULL)
-        cout<<"R->"<<root->right->data;
-    cout<<endl;
-    print(root->left);
-    print(root->right);
-}
 //******************input level wise**************************//
 binaryTreeNode<int>* takeLevelInput()
 {
@@ -143,6 +129,41 @@ bool isBalanced(binaryTreeNode<int> *root)
         return false;
 
 }
+//**********find path from root to any node***********//
+vector<pair<binaryTreeNode<int>*,char>> * findPath(binaryTreeNode<int>*root,int data)
+{
+    if(root == NULL)
+        return NULL;
+    pair<binaryTreeNode<int>*,char>  ansPair;
+    vector<pair<binaryTreeNode<int>*,char>> * ans = new vector<pair<binaryTreeNode<int>*,char>> ();
+    ansPair.first=root;
+    if(root->data == data)
+    {
+        ansPair.second = 'E';
+        ans->push_back(ansPair);
+        return ans;
+    }
+    vector<pair<binaryTreeNode<int>*,char>> * leftAns=findPath(root->left,data);
+    if(leftAns!=NULL)
+    {
+        ansPair.second='L';
+        ans->push_back(ansPair);
+        for(int i=0;i<leftAns->size();i++)
+            ans->push_back(leftAns->at(i));
+        return ans;
+    }
+    vector<pair<binaryTreeNode<int>*,char>> * rightAns=findPath(root->right,data);
+    if(rightAns!=NULL)
+    {
+        ansPair.second='R';
+        ans->push_back(ansPair);
+        for(int i=0;i<rightAns->size();i++)
+            ans->push_back(rightAns->at(i));
+        return ans;
+    }
+    return NULL;
+    
+}
 //**************************************************************************//
 int  main()
 {
@@ -153,9 +174,8 @@ int  main()
     cout<<endl;
     printLevelWise(root);
     /*DIAMETER CHECK
-    */
    cout<<"\ndiameter = "<<heightDiameter(root).second<<endl;
-    /*//to check total no of nodes
+    //to check total no of nodes
      cout<<"\ntotal number of nodes = "<<numNodes(root)<<endl;
     */
    /*
@@ -176,6 +196,19 @@ int  main()
    cout<<"\n***TREE IS MIRRORED****\n";
    printLevelWise(root);
    */
+  //*********to check findPath****//
+  int node;
+  cout<<"enter the node to find path to - ";
+  cin>>node;
+  vector<pair<binaryTreeNode<int>*,char>> *nodeHelper = findPath(root,node);
+    if(nodeHelper!=NULL)
+    {
+        for(int i=0;i<nodeHelper->size();i++)
+        {
+            cout<<nodeHelper->at(i).first->data<<nodeHelper->at(i).second;
+            cout<<"\n";
+        }
+    }
 }
 /*
 test tree
@@ -187,4 +220,4 @@ input - 1 2 3 4 -1 -1 6 -1 -1 -1 -1   (for level order)
                  /     \
                 4       6
 */
-//TODO - UPLAOD MATHS
+// 5 6 10 2 3 -1 -1 -1 -1 7 9 -1 -1 -1 8 -1 -1
