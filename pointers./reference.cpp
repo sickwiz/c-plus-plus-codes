@@ -1,8 +1,8 @@
 #include<iostream>
 using namespace std;
-void sq(int &k)  //passed by reference
+void sq(int *k)  //passed by reference
 {
-    k=k*k;
+    *k=(*k)*(*k);
 }
 int main()
 {
@@ -19,6 +19,6 @@ int main()
     cout<<"enter a number to square"<<endl;
     int n;
     cin>>n;
-    sq(n);
+    sq(&n);
     cout<<"square is->"<<n<<endl;
 }
