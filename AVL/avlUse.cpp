@@ -114,6 +114,76 @@ avl<int>* insert(avl<int> *node,int num)
    else
     return node;
 }
+avl<int>*deleteNode(avl<int>*node,int num)
+{
+    if(node == NULL)
+        return node;
+    if(num == node->data)
+    {
+       if(!node->left && !node->right)
+       {
+           delete node;
+           return NULL;
+       } 
+       if(node->left && !node->right)
+       {
+           avl<int>*temp=node;
+           node=node->left;
+           delete temp;
+           return node;
+       }
+       if(!node->left && node->right)
+       {
+           avl<int>*temp=node;
+           node=node->right;
+           delete temp;
+           return node; 
+       }
+       if(node->left && node->right)
+       {
+           avl<int>*rightMin=node->right;
+           while(rightMin->left!=NULL)
+           {
+               rightMin=rightMin->left;
+           }
+           node->data=rightMin->data;
+           node->right=deleteNode(node->right,rightMin->data);
+           return node;
+       }
+    }
+    if(num > node->data)
+        node->right=deleteNode(node->right,num);
+    else
+        node->left = deleteNode(node->left,num);
+
+    //update the height
+    node->height= 1+ max(findHeight(node->left),findHeight(node->right));
+
+    // reconstructing the avl
+    int bal = getBalance(node);
+    if(bal > 1 && num < node->left->data)  //left-left rotate
+        {
+            node = llRotate(node);
+            return node;
+        }
+    else if(bal < -1 && num > node->right->data)  // right-right case
+    {
+        node=rrRotate(node);
+        return node;
+    }
+    else if(bal > 1 && num > node->left->data)       //left-right case
+    {
+                node->left = rrRotate(node->left);  
+        return llRotate(node);  
+    }
+    else if (bal < -1 && num < node->right->data)  //right-left case
+    {  
+        node->right = llRotate(node->right);  
+        return rrRotate(node);  
+    }
+   else
+    return node;
+}
 int main()
 {
     avl<int>*a=new avl<int>(1);
@@ -124,7 +194,9 @@ int main()
    a=insert(a,76);
    a=insert(a,66);
    a=insert(a,69);
-
+     printLevelWise(a);
+     cout<<"\n*********deleting 66*************\n";
+    deleteNode(a,66);
     printLevelWise(a);
 }
 //1 7 12 19 52 76 66 69 
