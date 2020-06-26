@@ -77,9 +77,7 @@ class PriorityQueue
         }
         else
             return;
-        
-        
-    }
+     }
     void insert(int num)
     {
         pq->push_back(num);
