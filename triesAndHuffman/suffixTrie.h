@@ -43,7 +43,8 @@ class suffixTrie
     {
        for(int i =0;i<word.length();i++)
        {
-           insertWord(root,word.substr(i));
+           insertWord(root,word.substr(i));  //insert all substrings of word i.e if word is abc , insert "abc",
+                                            //"bc" and "c"
        }
     }
     //search for user
